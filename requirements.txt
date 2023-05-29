@@ -1,0 +1,9 @@
+asgiref==3.6.0
+Django==4.2.1
+GDAL==3.6.4
+numpy==1.24.3
+phe==1.5.0
+protobuf==4.21.12
+pycryptodome==3.18.0
+scipy==1.10.1
+sqlparse==0.4.4
