@@ -1,6 +1,8 @@
 
 from math import gcd
 import random
+
+from Crypto.PublicKey import DSA
  
 first_primes_list = [2, 3, 5, 7, 11, 13, 17, 19, 23, 29,
                      31, 37, 41, 43, 47, 53, 59, 61, 67,
@@ -66,3 +68,22 @@ def chosePub(p, q) -> int:
     while gcd(pub, phiN) != 1:
         pub = random.randint(0, (phiN - 1))
     return pub
+
+def mod_inverse(a, m):
+    # Extended Euclidean Algorithm to calculate the modular inverse
+    g, x, y = extended_gcd(a, m)
+    if g != 1:
+        raise ValueError("Modular inverse does not exist.")
+    return x % m
+
+def extended_gcd(a, b):
+    if b == 0:
+        return a, 1, 0
+    else:
+        g, x, y = extended_gcd(b, a % b)
+        return g, y, x - (a // b) * y
+    
+def gen_primes_bit(L = 512 + 64):
+    x = DSA.generate(L)
+    p, q, g = x.domain()
+    return p, q, g
